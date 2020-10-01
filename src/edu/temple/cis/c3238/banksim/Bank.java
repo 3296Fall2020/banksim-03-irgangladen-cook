@@ -31,8 +31,7 @@ public class Bank {
             accounts[to].deposit(amount);
         }
         
-        // Uncomment line when ready to start Task 3.
-        // if (shouldTest()) test();
+        if (shouldTest()) test();
     }
 
     public void test() {

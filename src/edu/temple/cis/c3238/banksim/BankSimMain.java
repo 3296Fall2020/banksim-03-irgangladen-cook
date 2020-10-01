@@ -30,7 +30,7 @@ public class BankSimMain {
 
         // Test to see whether the balances have remained the same
         // After all transactions have completed.
-        b.test();
+        //b.test();
           
     }
 }
