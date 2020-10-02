@@ -15,6 +15,7 @@ public class Bank {
     private long numTransactions = 0;
     private final int initialBalance;
     private final int numAccounts;
+    private boolean open;
 
     public Bank(int numAccounts, int initialBalance) {
         this.initialBalance = initialBalance;
@@ -58,5 +59,11 @@ public class Bank {
     public boolean shouldTest() {
         return ++numTransactions % NTEST == 0;
     }
+
+    //Added isOpen()
+	public synchronized boolean isOpen() 
+	{
+		return open;
+	}
 
 }
