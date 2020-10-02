@@ -15,13 +15,14 @@ public class Bank {
     private long numTransactions = 0;
     private final int initialBalance;
     private final int numAccounts;
+    private boolean open = true;
 
     public Bank(int numAccounts, int initialBalance) {
         this.initialBalance = initialBalance;
         this.numAccounts = numAccounts;
         accounts = new Account[numAccounts];
         for (int i = 0; i < accounts.length; i++) {
-            accounts[i] = new Account(i, initialBalance);
+            accounts[i] = new Account(this, i, initialBalance);
         }
         numTransactions = 0;
     }
@@ -58,6 +59,19 @@ public class Bank {
     
     public boolean shouldTest() {
         return ++numTransactions % NTEST == 0;
+    }
+    
+    public synchronized boolean isOpen(){
+        return open;
+    }
+    
+    public void closeBank(){
+        synchronized(this){
+            open = false;
+        }
+        for(Account account : accounts){
+            synchronized(account){account.notifyAll();}
+        }
     }
 
 }
