@@ -19,7 +19,8 @@ public class Account {
         this.balance = initialBalance;
     }
 
-    public int getBalance() {
+    public int getBalance() 
+    {
         return balance;
     }
 
