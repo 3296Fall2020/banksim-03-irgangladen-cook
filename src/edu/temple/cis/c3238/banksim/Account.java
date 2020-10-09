@@ -11,36 +11,62 @@ public class Account {
 
     private volatile int balance;
     private final int id;
-    private Bank myBank;
 
-    public Account(Bank myBank, int id, int initialBalance) {
-        this.myBank = myBank;
+    private final Bank myBank;			//Adding private myBank variable
+
+    public Account(Bank myBank, int id, int initialBalance) //adding mybank to the constructor
+    {
+    	this.myBank = myBank;
+
         this.id = id;
-        this.balance = initialBalance;
+        balance = initialBalance;
     }
 
     public int getBalance() 
     {
         return balance;
     }
-
-    public synchronized boolean withdraw(int amount) {
-        if (amount <= balance) {
+    
+    //Added waitForAvailableFunds()
+    public void waitForAvailableFunds(int amount) 
+    {
+		while (myBank.isOpen() && amount >= balance)
+		{
+			try 
+			{
+				wait();
+			}
+			catch (InterruptedException ex)
+			{
+				//Nothing
+			}
+		}
+				
+	}
+    
+    public synchronized boolean withdraw(int amount) 
+    {
+        if (amount <= balance) 
+        {
             int currentBalance = balance;
-            // Thread.yield(); // Try to force collision
+            Thread.yield(); // Try to force collision
             int newBalance = currentBalance - amount;
             balance = newBalance;
             return true;
-        } else {
+        } 
+        else 
+        {
             return false;
         }
     }
 
-    public synchronized void deposit(int amount) {
+    public synchronized void deposit(int amount) 
+    {
         int currentBalance = balance;
-        // Thread.yield();   // Try to force collision
+        Thread.yield();   // Try to force collision
         int newBalance = currentBalance + amount;
         balance = newBalance;
+        notifyAll();
     }
     
     @Override
