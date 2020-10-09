@@ -11,7 +11,7 @@ The collaboration was pretty good. We as a team split the work up in half and pr
 We tested the program with a test thread that was created to look at the problems and errors that was given. We had manual tests at first then that changed to automated after the test thread was created. We discovered a ton of problems and bugs when we were testing and implementing our code in, but we found a way through them. We both wrote the test and associated code together. The test thread was written after most of the code was done to ensure what was going on.
 
 ## Trello
-trello.com/b/CWGL9bR6/banksim
+https://trello.com/b/CWGL9bR6/banksim
 
 ## UML Sequence Diagram
 ![GitHub Logo](https://github.com/3296Fall2020/banksim-03-irgangladen-cook/blob/master/UMLSequenceDiagram.png)
