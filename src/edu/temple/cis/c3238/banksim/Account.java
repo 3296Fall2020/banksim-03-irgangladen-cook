@@ -11,11 +11,13 @@ public class Account {
 
     private volatile int balance;
     private final int id;
+
     private final Bank myBank;			//Adding private myBank variable
 
     public Account(Bank myBank, int id, int initialBalance) //adding mybank to the constructor
     {
     	this.myBank = myBank;
+
         this.id = id;
         balance = initialBalance;
     }
