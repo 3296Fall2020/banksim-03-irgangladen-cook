@@ -29,6 +29,7 @@ public class Bank {
     }
 
     public void transfer(int from, int to, int amount) {
+        accounts[from].waitForSufficientFunds(amount);
         if (accounts[from].withdraw(amount)) {
             accounts[to].deposit(amount);
         }

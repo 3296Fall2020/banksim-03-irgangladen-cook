@@ -23,6 +23,15 @@ public class Account {
     {
         return balance;
     }
+    
+    public synchronized void waitForSufficientFunds(int amount) {        
+        while (amount >= balance) {            
+            try {
+                wait();            
+            } catch (InterruptedException ex) { /*ignore*/ 
+            }        
+        }    
+    }
 
     public synchronized boolean withdraw(int amount) {
         if (amount <= balance) {
@@ -41,6 +50,7 @@ public class Account {
         // Thread.yield();   // Try to force collision
         int newBalance = currentBalance + amount;
         balance = newBalance;
+        notifyAll();
     }
     
     @Override
