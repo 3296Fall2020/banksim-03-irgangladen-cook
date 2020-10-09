@@ -11,21 +11,16 @@ package edu.temple.cis.c3238.banksim;
  * @author Modified by wild_
  */
 
-//Adding imports
-import java.util.concurrent.Semaphore;
 
 public class TestThread extends Thread
 {
     
     private final Bank bank;
-    Semaphore semaphore = null;		// Adding semaphores
-    Semaphore signal = null;		// Adding semaphores
     
     
-    public TestThread (Bank b, Semaphore semaphore)
+    public TestThread (Bank b)
     {
     	bank = b;
-    	this.semaphore = semaphore;
     }// end TestThread()
     
     @Override
@@ -33,30 +28,18 @@ public class TestThread extends Thread
     {
     	while (bank.isOpen())
     	{
-    		//increment the semaphore
-    		try
-    		{
-    			semaphore.acquire(10);
-    		}//end try()
-    		catch (InterruptedException ex)
-    		{
-    			//not doing anything here
-    		}//end catch()
     		if (bank.shouldTest())
     		{
     			bank.test();
-    		}//end if()
-    		//decrement the semaphore
-    		semaphore.release(10);
-    		
+    		}
     		try
     		{
     			sleep(1);
-    		}//end try
+    		}
     		catch (InterruptedException ex)
     		{
-    			//empty
-    		}//end catch
+    			//nothing
+    		}
     	}//end while()
     }//end run()
     
